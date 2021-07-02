@@ -13,15 +13,15 @@
 	<section id="game-boards">
 		<!-- these are draggable pieces -->
 		<div class="puzzle-pieces">
-			<img src="images/dd/topLeft0.jpg" alt="top left" class="puzzle-image">
-			<img src="images/dd/topRight0.jpg" alt="top left" class="puzzle-image">
-			<img src="images/dd/bottomLeft0.jpg" alt="top left" class="puzzle-image">
-			<img src="images/dd/bottomRight0.jpg" alt="top left" class="puzzle-image">
+			<img data-piecenum="tl" src="images/dd/topLeft0.jpg" alt="top left" class="puzzle-image">
+			<img data-piecenum="tr" src="images/dd/topRight0.jpg" alt="top left" class="puzzle-image">
+			<img data-piecenum="bl" src="images/dd/bottomLeft0.jpg" alt="top left" class="puzzle-image">
+			<img  data-piecenum="br" src="images/dd/bottomRight0.jpg" alt="top left" class="puzzle-image">
 		</div>
 		<!-- this is the drop zone  container-->
 		<div class="puzzle-board">
 			<!-- these are the drop zones -->
-			<div class="drop-zone"></div>
+			<div id="zone1" class="drop-zone"></div>
 			<div class="drop-zone"></div>
 			<div class="drop-zone"></div>
 			<div class="drop-zone"></div>
@@ -33,7 +33,7 @@
 		<p>click thumb to change pieces!</p>
 		<nav id="buttonHolder">
 			<h3 class="hidden">Select Image</h3>
-			<img data-imageref="0" data-videosrc="somesrc" src="images/dd/buttonZero.jpg" alt="thumbnail">
+			<img data-imageref="0" src="images/dd/buttonZero.jpg" alt="thumbnail">
 			<img data-imageref="1" src="images/dd/buttonOne.jpg" alt="thumbnail">
 	    <img data-imageref="2" src="images/dd/buttonTwo.jpg" alt="thumbnail">
 			<img data-imageref="3" src="images/dd/buttonThree.jpg" alt="thumbnail">
