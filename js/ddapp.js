@@ -5,9 +5,9 @@
 (() => {
     //identify the nodes of interest in the DOM
 	const puzzleSelectors = document.querySelectorAll("#buttonHolder img"),
-				dropcontainer = document.querySelector(".puzzle-board"),
-				dragimages = document.querySelectorAll(".puzzle-image"),
-				dropzones = document.querySelectorAll(".drop-zone");
+				dropContainer = document.querySelector(".puzzle-board"),
+				dragImages = document.querySelectorAll(".puzzle-image"),
+				dropZones = document.querySelectorAll(".drop-zone");
 
 		// functions go in the middle
 		function swapImages() {
@@ -20,12 +20,16 @@
 			// 		newImagePath = `url(images/dd/backGround${imageIndex}.jpg)`;
 
 			// 2. set the backround image of the dropcontainer
-			dropcontainer.style.backgroundImage = `url(images/dd/backGround${this.dataset.imageref}.jpg)`;
+			dropContainer.style.backgroundImage = `url(images/dd/backGround${this.dataset.imageref}.jpg)`;
 			// debugger;
 		}
 
-		function startDrag() {
-			console.log('dragging ' + this.dataset.piecenum);
+		function startDrag(event) {
+			console.log('dragging ' + this.id);
+			//Save reference to element the user is dragging
+			//so that we can retrieve the element later and put it in a drop zone
+			event.dataTransfer.setData("dragTarget", this.id);
+			//debugger;
 		}
 
 		function draggedOver(event) {
@@ -34,19 +38,26 @@
 		}
 
 		function dropped(event) {
+			//allow a drop happen
 			event.preventDefault();
-			console.log('dropped on the element');
-			console.log(event.target.id);
+
+			//if we've already droppped and appended into the drop zone, then it shouldn't happen again
+			//the return statement is a code-killer - nothing will execute past this line/statement
+			if (this.children.length > 0) {return;}
+
+			//get the reference to the dregged image - saved in the drag function using setData
+			let targetImage = document.querySelector(`#${event.dataTransfer.getData("dragTarget")}`);
+
+			//add it to the zone we dropped the image on
+			this.appendChild(targetImage);
 		}
 
 
 		// event handling at the bottom
-	dragimages.forEach(piece => {
-		piece.addEventListener('dragstart', startDrag, false);
-	});
+	dragImages.forEach(piece =>	piece.addEventListener('dragstart', startDrag, false));
 
 
-	dropzones.forEach(zone => {
+	dropZones.forEach(zone => {
 		zone.addEventListener('drop',dropped, false);
 		zone.addEventListener('dragover',draggedOver, false);
 	});
